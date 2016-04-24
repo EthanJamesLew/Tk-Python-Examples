@@ -5,44 +5,6 @@ and then a controller is made.
 """
 
 import tkinter as tk
-
-class SquareController(tk.Frame):
-    def __init__(self, parent, *args, **kwargs):
-        """
-        SquareController is a tk.Frame that provides the GUI interface to control squares drawn in App
-        """
-        
-        tk.Frame.__init__(self, parent, *args, **kwargs)
-        self.parent = parent
-        
-        ##Objects
-        self.child = tk.Frame(self.parent, height=2, bd=1, relief='groove', borderwidth=4)
-        self.label = tk.Label(self.child, text="Delete?")
-        self.button = tk.Button(self.child, text = "Delete")
-        self.colorLabel = tk.Label(self.child, text="Color:")
-        self.colorInput = tk.Entry( self.child)
-        
-        ##Packing
-        self.child.pack(side='top')
-        self.label.pack(side='top')
-        self.button.pack(side='top')
-        self.colorLabel.pack(side='top')
-        self.colorInput.pack(side='top')
-
-        ##Bindings
-        self.button.bind("<Button-1>", self.deleteClicked)
- 
-    def deleteClicked(self, event=None):
-        """
-        deleteClicked is a callback that deletes the rectangle in the App canvas
-        """
-        self.child.pack_forget()
-        self.child.destroy()
-        self.destroy()
-
-    def setLabel(self, text, event=None):
-        self.label.config(text=text)
-            
         
 
 class App:
@@ -99,6 +61,44 @@ class App:
             self.canvas.itemconfigure(self.rectangles[int(a)-1], fill=frame.colorInput.get())
         except:
             None
+
+class SquareController(tk.Frame):
+    def __init__(self, parent, *args, **kwargs):
+        """
+        SquareController is a tk.Frame that provides the GUI interface to control squares drawn in App
+        """
+        
+        tk.Frame.__init__(self, parent, *args, **kwargs)
+        self.parent = parent
+        
+        ##Objects
+        self.child = tk.Frame(self.parent, height=2, bd=1, relief='groove', borderwidth=4)
+        self.label = tk.Label(self.child, text="Delete?")
+        self.button = tk.Button(self.child, text = "Delete")
+        self.colorLabel = tk.Label(self.child, text="Color:")
+        self.colorInput = tk.Entry( self.child)
+        
+        ##Packing
+        self.child.pack(side='top')
+        self.label.pack(side='top')
+        self.button.pack(side='top')
+        self.colorLabel.pack(side='top')
+        self.colorInput.pack(side='top')
+
+        ##Bindings
+        self.button.bind("<Button-1>", self.deleteClicked)
+ 
+    def deleteClicked(self, event=None):
+        """
+        deleteClicked is a callback that deletes the rectangle in the App canvas
+        """
+        self.child.pack_forget()
+        self.child.destroy()
+        self.destroy()
+
+    def setLabel(self, text, event=None):
+        self.label.config(text=text)
+            
 
 if __name__=="__main__":
     root = tk.Tk()
